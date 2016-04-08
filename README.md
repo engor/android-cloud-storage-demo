@@ -12,14 +12,14 @@ dependencies {
     compile 'com.google.android.gms:play-services-drive:8.4.0'
 }
 3. Add permission into manifest
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+android.permission.INTERNET
+android.permission.GET_ACCOUNTS
 
 
 ## What's inside
 
 There are 2 interfaces for working with cloud - ICloudApi and INotifier.
-
+<code>
 public interface ICloudApi extends IDisposable {
     void saveFile(String fileName, byte[] fileContent, INotifier<StorageSaveEventArgs> resultListener);
     void loadFile(String fileName, INotifier<StorageLoadEventArgs> resultListener);
@@ -29,10 +29,11 @@ public interface ICloudApi extends IDisposable {
 public interface INotifier<TArgs extends EventArgs> {
     void notify(TArgs args);
 }
+</code>
 
 Using class CloudStorage we can replace inner realization without changing outside logic.
 So it possible to replace Drive API with other one - easy.
-
+<code>
 public class CloudStorage implements ICloudApi {
 
     private ICloudApi cloudApi;
@@ -83,3 +84,4 @@ public class CloudStorage implements ICloudApi {
     }
 
 }
+</code>
