@@ -1,38 +1,11 @@
-# android-cloud-storage-demo
-Demo of using Google Drive API for saving and loading files in AppFolder scope.
+package com.fingerdev.cloudstoragedemo.cloud;
 
-Read documentation: https://developers.google.com/drive/android/get-started
+import android.app.Activity;
+import com.fingerdev.cloudstoragedemo.events.INotifier;
 
-
-## What do you need to use
-
-1. Create OAuth 2.0 client ID - read about it by the link above.
-2. Add in gradle 
-dependencies {
-    compile 'com.google.android.gms:play-services-drive:8.4.0'
-}
-3. Add permission into manifest
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
-
-## What's inside
-
-There are 2 interfaces for working with cloud - ICloudApi and INotifier.
-
-public interface ICloudApi extends IDisposable {
-    void saveFile(String fileName, byte[] fileContent, INotifier<StorageSaveEventArgs> resultListener);
-    void loadFile(String fileName, INotifier<StorageLoadEventArgs> resultListener);
-    void connect();
-}
-
-public interface INotifier<TArgs extends EventArgs> {
-    void notify(TArgs args);
-}
-
-Using class CloudStorage we can replace inner realization without changing outside logic.
-So it possible to replace Drive API with other one - easy.
-
+/**
+ * Created by nerobot on 23.03.2016.
+ */
 public class CloudStorage implements ICloudApi {
 
     private ICloudApi cloudApi;
