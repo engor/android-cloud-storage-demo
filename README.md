@@ -20,7 +20,8 @@ android.permission.GET_ACCOUNTS
 
 There are 2 interfaces for working with cloud - ICloudApi and INotifier.
 
-<code>public interface ICloudApi extends IDisposable {
+```java
+public interface ICloudApi extends IDisposable {
     void saveFile(String fileName, byte[] fileContent, INotifier<StorageSaveEventArgs> resultListener);
     void loadFile(String fileName, INotifier<StorageLoadEventArgs> resultListener);
     void connect();
@@ -28,12 +29,14 @@ There are 2 interfaces for working with cloud - ICloudApi and INotifier.
 
 public interface INotifier<TArgs extends EventArgs> {
     void notify(TArgs args);
-}</code>
+}
+```
 
 Using class CloudStorage we can replace inner realization without changing outside logic.
 So it possible to replace Drive API with other one - easy.
 
-<code>public class CloudStorage implements ICloudApi {
+```java
+public class CloudStorage implements ICloudApi {
 
     private ICloudApi cloudApi;
 
@@ -82,4 +85,5 @@ So it possible to replace Drive API with other one - easy.
         }
     }
 
-}</code>
+}
+```
